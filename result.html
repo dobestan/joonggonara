@@ -1,0 +1,469 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>네이버me</title>
+
+<link rel="stylesheet" type="text/css" href="/css/naverme_login_20140626.css">
+<script type="text/javascript" charset="UTF-8" src="/js/release/naverme_login_20131226.js"></script>
+<script src="http://static.naver.net/common/js/cs_ops_webncc.js"></script>
+
+<style type="text/css">
+/* rolling */
+.rolling { width:330px; border:5px solid violet; overflow:hidden; position:relative; }
+.rolling ul { list-style:none; width:32700px; margin:0; padding:0; float:left; height: 50px; }
+.rolling ul li { background-color:#ff7; width:80px; float:left; border:5px solid red; padding:5px; margin:5px; height : 20px; }
+</style>
+
+<script>
+	document.domain = 'naver.com';
+	
+	var nsc = "me.login";
+	var nclk_evt = 3;
+	
+	var openNotice = function(url) {
+		var noticeWin = window.open(url, 'noticePop', 'width=820, height=670');
+		try {
+			noticeWin.focus();
+		} catch (e) {	}
+	}
+	    
+	var showMobilePopup = function() {
+		var i = Math.floor(Math.random() * 10 + 1) % 2;
+	
+		if(i === 1) {
+			window.open("http://mobile.naver.com/service/popup_iphone.nhn?url=http://m.me.naver.com", "myWindow", "status = 1, height = 645, width = 375, resizable = 0, scrollbars=no");
+		} else if(i === 0) {
+			window.open("http://mobile.naver.com/service/popup_galaxyS.nhn?url=http://m.me.naver.com", "myWindow", "status = 1, height = 645, width = 375, resizable = 0, scrollbars=no");
+		}
+	};	
+	
+</script>
+
+</head>
+<body onload="getGNB();">
+
+<div id="wrap">
+	<!--  header -->
+	
+
+
+
+
+
+<script type="text/javascript">
+	var logoutUrl="http://me.naver.com";
+	
+	function _mBtnMouseOverHandler() {
+		var elToolTip = document.getElementById("ttHOME");
+		elToolTip.style.display = "block";
+	}
+
+	function _mBtn2MouseOverHandler() {
+		var elToolTip = document.getElementById("ttSE");
+		elToolTip.style.display = "block";
+	}
+
+	function _mBtn3MouseOverHandler() {
+		var elToolTip = document.getElementById("ttME");
+		elToolTip.style.display = "block";
+	}
+
+	function _mBtnMouseOutHandler() {
+		var elToolTip = document.getElementById("ttHOME");
+		elToolTip.style.display = "none";
+	}
+
+	function _mBtn2MouseOutHandler() {
+		var elToolTip = document.getElementById("ttSE");
+		elToolTip.style.display = "none";
+	}
+
+	function _mBtn3MouseOutHandler() {
+		var elToolTip = document.getElementById("ttME");
+		elToolTip.style.display = "none";
+	}
+
+	function createEvent(oElement, sEvent, fHandler) {
+		if (oElement.attachEvent) {
+			oElement.attachEvent('on' + sEvent, fHandler);
+		} else {
+			oElement.addEventListener(sEvent, fHandler, true);
+		}
+	}
+
+	function initTopNavi() {
+		var mBtn = document.getElementById("mBtn");
+		var mBtn2 = document.getElementById("mBtn2");
+		var mBtn3 = document.getElementById("mBtn3");
+		createEvent(mBtn, "mouseover", this._mBtnMouseOverHandler);
+		createEvent(mBtn2, "mouseover", this._mBtn2MouseOverHandler);
+		createEvent(mBtn3, "mouseover", this._mBtn3MouseOverHandler);
+		createEvent(mBtn, "mouseout", this._mBtnMouseOutHandler);
+		createEvent(mBtn2, "mouseout", this._mBtn2MouseOutHandler);
+		createEvent(mBtn3, "mouseout", this._mBtn3MouseOutHandler);
+	}	
+</script>
+
+    <div id="wrap_fix">
+        <div id="header">
+            <a id="startElement"></a>
+            <a class="skip" onclick="$('container').tabIndex=-1;$('container').focus();return false;" href="#container">콘텐츠로 바로 이동하기</a>
+            <a class="skip" onclick="$('loginframe').tabIndex=-1;$('loginframe').focus();return false;" href="#loginframe">로그인하기</a>
+			<h1><a href="http://www.naver.com/" title="네이버" class="naver"  onclick="clickcr(this,'HNB.naver','','1',event);">
+					<span class="blind">네이버</span>
+				</a>
+				<a href="http://me.naver.com/" title="네이버me" class="naverme" onclick="clickcr(this,'HNB.me','','1',event);">
+			        <span class="blind">네이버me</span>
+			    </a>
+			</h1>
+			<h2 class="blind">홈 유형 선택</h2>
+			
+			<ul class="nav_hm">
+				<li id="mBtn" class="m">
+					<a href="http://www.naver.com/" onclick="clickcr(this, 'HNB.casthome', '', '', event);">
+						<span class="blind">네이버</span>
+						<span id="ttHOME" class="lb lb_hm" style="display:none;">
+							<span class="tx">네이버 홈</span>
+							<span class="edge"></span>
+						</span>
+					</a>
+				</li>
+			    <li id="mBtn2" class="m2">
+			    	<a href="http://se.naver.com/" onclick="clickcr(this, 'HNB.searchhome', '', '', event);">
+			    		<span class="blind">네이버SE</span>
+				    	<span id="ttSE" class="lb lb_se" style="display:none;">
+				    		<span class="tx">가볍고 빠른 검색홈, <em>네이버SE</em></span>
+				    		<span class="edge"></span>
+				    	</span>
+			    	</a>
+			    </li>
+			    <li id="mBtn3" class="m3">
+			    	<a href="http://me.naver.com/" onclick="clickcr(this, 'HNB.mehome', '', '', event);">
+			    		<span class="blind">네이버me</span>
+				    	<span id="ttME" class="lb lb_me" style="display:none;">
+				    		<span class="tx">나만의 네이버 홈, <em>네이버me</em></span>
+				    		<span class="edge"></span>
+			    		</span>
+			    	</a>
+			    </li>
+			</ul>
+            <h2 class="blind">로그인 및 통합검색</h2>
+            <div class="log">
+                <!-- GNB 템플릿 적용부 -->
+                <div id="gnb"></div>
+                <script type="text/javascript" charset="utf-8" src="http://static.gn.naver.net/template/pwe_commonwhite_utf8.nhn?20130205"></script>
+                <!--//GNB 템플릿 적용부 -->
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+// 웹 접근성 skip navigation 적용
+var skipNavi = function(we) {
+	if(we.key().enter) {
+		var sElemId = $Element(we.element).attr('data-elem');
+		var el = $(sElemId);						
+		if(el) {
+			$Element(el).attr('tabindex', -1);
+			el.focus();
+		}
+		
+		return false;
+	}	
+}
+
+if($('u_skip')) {
+	$Fn(skipNavi, this).attach($('u_skip'), 'keydown');
+}
+
+</script>
+	<!-- //header -->
+	<div class="my_wrap" style="">
+		<div class="min_my_wrap">
+			
+
+
+
+
+
+
+
+
+
+	
+	
+		
+		
+			
+			
+				
+				
+				
+			
+		
+	
+
+
+
+
+
+	
+	
+		
+		
+			
+			
+				
+				
+				
+			
+		
+	
+
+
+
+
+
+
+
+	
+	
+		
+		
+		
+	
+
+
+
+
+
+	
+	
+		
+		
+			
+			
+				
+				
+				
+			
+		
+	
+
+
+
+
+
+
+
+	
+	
+		
+		
+		
+	
+
+
+
+
+
+
+
+	
+	
+		
+		
+		
+	
+
+
+
+
+
+
+
+	
+	
+		
+		
+		
+	
+
+
+
+<div class="nav_lst">
+	<ul class="nav_btn">
+		<li class="mail"><a href="http://mail.naver.com" title="메일" id="acs1" class="N=a:PNB.mail"><span class="blind">메일</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+		<li class="calendar"><a href="http://calendar.naver.com" title="캘린더" class="N=a:PNB.calendar"><span class="blind">캘린더</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>					
+		<li class="address"><a href="http://contact.naver.com" title="주소록" class="N=a:PNB.contact"><span class="blind">주소록</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+		<li class="ndrive"><a href="http://ndrive.naver.com" title="N드라이브" class="N=a:PNB.ndrive"><span class="blind">N드라이브</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+		<li class="office"><a href="http://office.naver.com" title="오피스" class="N=a:PNB.office"><span class="blind">오피스</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+		<li class="memo2"><a href="http://memo.naver.com" title="메모" class="N=a:PNB.memo"><span class="blind">메모</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+		<li class="moneybook"><a href="http://moneybook.naver.com/" title="가계부" class="http://moneybook.naver.com/"><span class="blind">메모</span> <span class="" style="display:block;"><span class="num_lft"></span></span></a></li>
+	</ul>
+</div>
+		</div>
+	</div>
+
+	<div id="container">
+		<div class="content">
+			<div class="section_area">
+				<div class="h_mail">
+					<h3><span>나만의 네이버홈 네이버me</span></h3>
+				</div>
+				<div id="banner_area" class="banner_area">				
+					<div id="banner_rolling" class="banner_rolling">
+						<ul style="width:20000px;">
+							<li><img src="http://static.naver.net/me/new/me_roll_00.png" width="625" height="471" alt="관심 있는 주제의 최신 뉴스가 네이버me 구독에 쏙쏙 - 이웃을 맺지 않고 전문 블로그의 새 글을 편하게 구독해보세요."></li>
+							<li><img src="http://static.naver.net/me/new/me_roll_01.png" width="625" height="471" alt="보고 또 보고 싶은 그 글, 콕! 집어서 북마크함으로! - 폴더로 구분하여 나만의 지식 저장소를 만들어 보세요."></li>
+							<li><img src="http://static.naver.net/me/new/me_roll_02.png" width="625" height="471" alt="여기 저기 흩어져있던 알림 설정을 한번에! - 네이버me 알림부터 모바일 앱까지 알림 설정에서 편리하게 관리하세요."></li>
+						</ul>
+					</div>
+					<button type="button" class="btn_prev _btn_prev N=a:cnt.prev" title="이전 배너 보기">이전</button>
+					<button type="button" class="btn_next _btn_next N=a:cnt.next" title="다음 배너 보기">다음</button>
+					<div id="rolling_paging" class="rolling_paging">
+						<p>
+						<!-- [D] 선택 클래스 .on 클래스 추가 -->
+						<button type="button" class="_paging_btn" title="첫번째 배너보기" data-index="0"><span class="blind">첫번째 배너보기</span></button>
+						<button type="button" class="_paging_btn" title="두번째 배너보기" data-index="1"><span class="blind">두번째 배너보기</span></button>
+						<button type="button" class="_paging_btn" title="세번째 배너보기" data-index="2"><span class="blind">세번째 배너보기</span></button>
+						</p>
+					</div>
+				</div>
+				<div class="down_area">
+					<ul>
+					<li class="dw_app"><a href="http://mobile.naver.com/service/app" target="_blank" class="N=a:cnt.appdown"><span class="blind">모바일 앱 다운로드하기</span></a></li>
+					<li class="dw_window"><a href="https://help.naver.com/support/service/main.nhn?serviceNo=984" target="_blank" class="N=a:cnt.help"><span class="blind">고객센터 바로가기</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="section_aside">
+				<!-- 공통 로그인 -->
+				<div class="login_area">
+					<div class="login_box">
+						<p class="slogan">내소식이 궁금하다면,</p>
+						<a class="btn_login" href="https://nid.naver.com/nidlogin.login?url=http://me.naver.com">
+							<span class="btn_inner"><i>NAVER 로그인</i></span>
+						</a>
+						<span class="forgot">
+							<a class="forgot_id" href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry">아이디 찾기</a>
+							<span class="bar">|</span>
+							<a class="forgot_pw" href="https://nid.naver.com/user2/help/pwInquiry.nhn?menu=pwinquiry">비밀번호 찾기</a>
+							<a class="register" href="https://nid.naver.com/nidregister.form">회원가입</a>
+						</span>
+					</div>
+				</div>
+				<!-- 공지 영역 -->
+				<div class="notic_area">
+					<ul>
+										
+					<li>
+						<a href="#" target="_blank"  onclick="openNotice('http://me.naver.com/main/notice/read/10000000000029996635.nhn'); return false;" class="N=a:cnt.notice">
+							<span>[안내] 포스트 작가/시리즈의 새글 알림..</span>
+							
+						</a>
+					</li>
+										
+					<li>
+						<a href="#" target="_blank"  onclick="openNotice('http://me.naver.com/main/notice/read/10000000000029975402.nhn'); return false;" class="N=a:cnt.notice">
+							<span>[안내] 관심지역의 소셜커머스 서비스 종..</span>
+							
+						</a>
+					</li>
+										
+					<li>
+						<a href="#" target="_blank"  onclick="openNotice('http://me.naver.com/main/notice/read/10000000000029927415.nhn'); return false;" class="N=a:cnt.notice">
+							<span>[안내] 네이버me 소식함/구독함 통합 ..</span>
+							
+						</a>
+					</li>
+					
+					</ul>
+
+				</div>				
+				<!-- //공지 영역 -->
+				<!-- 네이버me를 말하다 -->
+				<div class="comment_area">
+					<h3 class="h_comment"><span>네이버me를 말하다</span></h3>
+					<div class="comment_lst" id="comment_rolling">
+						<ul>
+							<li><em class="ic">코멘트</em>
+								<span>"스트리트패션부터 해외컬렉션까지! 한 권의 패션 잡지가 따로 없네요"</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"매일 배달되는 고수들의 육아 비법으로 초보 엄마에서 탈출했어요!"</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"이 카페, 저 카페 글을 한번에 모아볼 수 있다니! 왜 이걸 몰랐을까요."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"국내여행 구독 후 알짜배기 정보 덕에 인기 만점 아빠로 등극했답니다."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"관심 정보부터 페이스북, 트위터까지! 로그인하면 꼭 들어와 보게 돼요."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"메일함 무한클릭 하지 않아도, 알림으로 즉각 알려주니 너무 좋아요!"</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"기다리던 카페 게시판 댓글을 모아볼 수 있으니 시간 절약까지 돼요."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"네이버앱으로 실시간 알림까지! 일상이 한결 스마트해졌습니다."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"비 오는 날 우산 챙기는 센스~! 네이버me 날씨 위젯 덕 좀 봤어요."</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"충동구매 하려던 날, 네이버me 운세가 붙잡아줬어요~"</span>
+							</li>
+							<li><em class="ic">코멘트</em>
+								<span>"잊고 있던 부모님 결혼기념일, 캘린더 위젯 덕분에 잘 챙겨드렸어요."</span>
+							</li>
+						</ul>
+					</div>
+					<p class="comment_paging">
+                    	<button title="이전 글" type="button" class="_comment_rolling_prev"><span class="blind">이전</span></button>
+                    	<button title="다음 글" class="_comment_rolling_next"><span class="blind">다음</span></button>
+                	</p>
+				</div>
+				<!-- 네이버me를 말하다 -->
+			</div>
+		</div>
+	</div>
+	<!-- //container -->
+	<!-- footer -->	
+	<div id="footer" class="non_border">
+		<p>
+			Copyright ⓒ <a href="http://nhncorp.com/" target="_blank" class="N=a:fot.nhncorp">NAVER Corp</a>. All Rights Reserved.
+		</p>
+	</div>
+	<!-- //footer -->
+</div>
+<script type="text/javascript">
+	nclk_do();
+	
+	try{
+		var oAdditionalInfo = {};
+		oAdditionalInfo['sti']="me_login";
+		lcs_do(oAdditionalInfo);
+	}catch(e) {}
+	
+	// header initialize
+	if(typeof(initTopNavi) == "function"){		
+		initTopNavi();
+	}
+		
+	nhn.naverme.login.init();	
+
+</script>
+</body>
+</html>
